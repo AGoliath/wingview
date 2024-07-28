@@ -58,16 +58,10 @@ document.renderSnap = function () {
         })
     })
 
-    // create an array with nodes
+    // render the network
     var vertexes = new vis.DataSet(vertexArray);
-
-    // create an array with edges
     var edges = new vis.DataSet(edgesArray);
-
-    // create a network
     var container = document.getElementById('mynetwork');
-
-    // provide the data in the vis format
     var data = {
         nodes: vertexes,
         edges: edges
@@ -99,17 +93,15 @@ document.renderSnap = function () {
                 shakeTowards: "roots",
                 blockShifting: false,
                 edgeMinimization: true,
-                treeSpacing:100,
-                nodeSpacing:150
+                treeSpacing: 100,
+                nodeSpacing: 150
             }
         }
     };
-
-    // initialize your network!
     var network = new vis.Network(container, data, options);
 
 
-    document.getElementById('output').textContent = JSON.stringify(connections, null, 2);
+    //document.getElementById('output').textContent = JSON.stringify(connections, null, 2);
 
 
 
@@ -155,11 +147,11 @@ function parseMainAndMatrix(type, snap, nodes, connections) {
     return channels;
 }
 
-function pickShape(type){
-    switch(type){
+function pickShape(type) {
+    switch (type) {
         case "bus": return "database";
         case "ch": return "ellipse";
-        default :return "circle";
+        default: return "circle";
     }
 }
 
@@ -355,7 +347,7 @@ function parseOutputs(snap, nodes, connections) {
                 if (lclData.grp && lclData.grp !== "OFF") {
                     var locIn = lclData.in;
                     var locGrp = lclData.grp;
-                    if (lclData.grp == "MTX"||lclData.grp == "MAIN") locIn =Math.ceil(lclData.in / 2) //matrixes are seen as stereo apris, so matrix 2 is actually the right channel of matrix 1
+                    if (lclData.grp == "MTX" || lclData.grp == "MAIN") locIn = Math.ceil(lclData.in / 2) //matrixes are seen as stereo apris, so matrix 2 is actually the right channel of matrix 1
                     if (lclData.grp == "USR") locGrp = "in#usr"
 
                     connections.push({
