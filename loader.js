@@ -15,8 +15,9 @@ document.getElementById('fileInput').addEventListener('change', function (event)
                 return;
             }
 
-            if(!snap.type || !snap.type.indexOf("snapshot") > -1 || !snap.ae_data){
-                alert("Warning: Your file seems to be valid JSON, but not a snapshot file from the latest Wing Edit version 1.3.1. Parsing will continue, but might error out...\nIf you receive a parsing error, try loading the Snapshot into Wing Edit 1.3.1 or later, save it, and try to open the new save again.");
+            if(!snap || !snap.type || snap.type.indexOf("snapshot") == -1 || !snap.ae_data){
+                debugger;
+                alert("Warning: Your file seems to be valid JSON, but not a snapshot file from the latest Wing Edit version 1.3.1.\n\nParsing will continue, but might error out...\nIf you receive a parsing error, try loading the Snapshot into Wing Edit 1.3.1 or later, save it, and try to open the new save again.");
                
             }
 
