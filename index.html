@@ -26,19 +26,29 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <h1> wingView</h1>
-        <p>Renders the current routing configuration.
-             Please note: Direct Inputs on Matrixes are not yet rendered.</p>
+        <p>Renders the current routing configuration. 
              <p><a href="https://github.com/AGoliath/wingview">Source Code available on Github under GPL3</a></p>
-            <p>Last Update: 29.07.2024</p>
+            <p>Everything runs locally on your Browser, the snapshot you select is never uploaded to any server.
+
+This software is licensed under the GPL3, see LICENSE.md, and was thrown together in just a few hours. So don´t expect any fancy (or even bug-free or feature-rich) code or features. Please add questions/comments/bugs as github issues, pull requests are very welcome!
+
+To actually draw the network, visnetwork from visjs is used.</p>
+            <p>Last Update: 30.07.2024</p>
+            <b>Known Issues</b>
+            <ul>
+                <li>Your snap will be rejected if it is not in the format Wing-Edit version 1.3.1 will save it. You can try opening and saving it without modifications and try that fresh save again.</li>
+                <li><s>Direct routing from stereo Busses to OUTs will either display incorrect or will lead to rejecting your SNAP altogether</s> fixed</li>
+                <li>Direct Inputs on Matrixes are not yet rendered.</li>
+                <li>To report further issues or would like to provide your snap file for further extensions of this tool, please post <a href="https://behringer.world/viewtopic.php?t=1728">in this forum thread</a> or <a href="https://github.com/AGoliath/wingview/issues">create a Github issue</a></li>
+            </ul>
              <h3>Select a .snap file</h3>
     <input type="file" id="fileInput" accept=".snap">
     <h3>Connections</h3>
     <div id="mynetwork"></div>
     <pre id="output"></pre>
-<script>
-    document.snap = {};
-    </script>
-        <script src="loader.js" async defer></script>
+ 
         <script src="render.js" async defer></script>
+        <script src="parse.js" async defer></script>
+        <script src="loader.js" async defer></script>
     </body>
 </html>
