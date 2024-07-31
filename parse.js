@@ -126,9 +126,12 @@ function parseChannelsAndBusses(type, snap, nodes, connections) {
         if (type != "bus") {
             //main in
             if (lclData.in.conn.grp != "OFF") {
-
+                let locGrp = lclData.in.conn.grp;
+                let locIn = lclData.in.conn.in ;
+                if (locGrp == "SEND" || locGrp == "MTX" || locGrp == "MON" || locGrp == "MAIN" || locGrp == "BUS") locIn = Math.ceil(locIn / 2)
+                if (inputNames.includes(locGrp)) { locGrp = "in#" + locGrp }
                 connections.push({
-                    from: "in#" + lclData.in.conn.grp + "#" + lclData.in.conn.in,
+                    from: locGrp + "#" + locIn,
                     to: obj.hash,
                     "type": "mainin",
                     active: !lclData.in.set.altsrc
@@ -137,8 +140,13 @@ function parseChannelsAndBusses(type, snap, nodes, connections) {
             }
             if (lclData.in.conn.altgrp != "OFF") {
                 //alt in
+                let locGrp = lclData.in.conn.altgrp;
+                let locIn = lclData.in.conn.altin ;
+                if (locGrp == "SEND" || locGrp == "MTX" || locGrp == "MON" || locGrp == "MAIN" || locGrp == "BUS") locIn = Math.ceil(locIn / 2)
+                if (inputNames.includes(locGrp)) { locGrp = "in#" + locGrp }
+                
                 connections.push({
-                    from: "in#" + lclData.in.conn.altgrp + "#" + lclData.in.conn.altin,
+                    from: locGrp + "#" + locIn,
                     to: obj.hash,
                     "type": "altin",
                     active: lclData.in.set.altsrc
@@ -249,7 +257,7 @@ function parseInputs(snap, nodes) {
                     key: key,
                     data: lclData,
                     render: false,
-                    level: group== "USR"?3:1,
+                    level: group == "USR" ? 3 : 1,
                     label: xl,
                     hash: ("in#" + group + "#" + key).toLowerCase(),
                     shape: "box"
